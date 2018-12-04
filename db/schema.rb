@@ -12,16 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20181204204220) do
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "categories_translations", force: :cascade do |t|
     t.integer "translation_id"
     t.integer "category_id"
   end
 
-  create_table "category", force: :cascade do |t|
-    t.string "category_name"
-  end
-
-  create_table "translation", force: :cascade do |t|
+  create_table "translations", force: :cascade do |t|
     t.string "english"
     t.string "russian"
     t.string "french"

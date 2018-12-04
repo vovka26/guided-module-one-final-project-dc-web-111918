@@ -1,2 +1,2 @@
-class CategoriesTranslations <ActiveRecords::Base
+class CategoriesTranslations <ActiveRecord::Base
 end
