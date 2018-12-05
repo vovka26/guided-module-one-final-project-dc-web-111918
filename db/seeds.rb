@@ -1,13 +1,13 @@
-# Category.destroy_all
-# Translation.destroy_all
-# CategoriesTranslations.destroy_all
+Category.destroy_all
+Translation.destroy_all
+CategoriesTranslation.destroy_all
 
-greetings = Category.create(categories_translations: "Greetings")
-food = Category.create(categories_translations: "Food")
-directions = Category.create(categories_translations: "Directions")
-
-
-hello = Translation.create(english: "Hello", russian: "Привет", arabic: "مرحبا", french: "Bonjour")
+greeting = Category.find_or_create_by(name: "Greetings")
+food = Category.find_or_create_by(name: "Food")
+directions = Category.find_or_create_by(name: "Directions")
 
 
-hello_translation = CategoriesTranslations.find_or_create_by(hello: hello, category: greetings)
+hello = Translation.find_or_create_by(english: "Hello", russian: "Привет", arabic: "مرحبا", french: "Bonjour")
+
+
+hello_translation = CategoriesTranslation.create!(category: greeting, translation: hello)
