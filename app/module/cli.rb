@@ -41,7 +41,10 @@ class Cli
     puts "Awesome! #{self.chosen_language_name} it is!"
     puts ""
     self.how_many_words
-    self.get_random_words.each {|word| puts word}
+    self.get_random_words
+    self.flash_cards
+
+    # self.get_random_words.each {|word| puts word}
   end
 
   def chosen_language_name
@@ -85,6 +88,39 @@ class Cli
   #randomize all_category_words and pick three, returns an array
   def get_random_words
     self.words_array = self.get_all_category_words.shuffle.first(self.number_of_words.to_i)
+  end
+
+  def flash_cards
+    i = 0
+    while i < self.words_array.length
+      # binding.pry
+      puts ""
+      puts "'n' for next || 'p' for previous || 'quit' to exit"
+      puts ""
+      user_input = gets.chomp.downcase
+      return self.quit if user_input == "quit"
+      if user_input == "p" && i == 0
+        # binding.pry
+        puts "This is the beginning of the words set."
+        puts "Please type 'n'."
+        puts ""
+      elsif user_input == "n"
+        puts ""
+        puts self.words_array[i]
+        i += 1
+        if i == self.words_array.length
+          puts ""
+          puts "This is the end of list."
+          puts ""
+        end
+      elsif user_input ==  "p"
+        i -= 1
+        puts ""
+        puts self.words_array[i]
+      else
+        self.try_again
+      end
+    end
   end
 
   def how_many_words
