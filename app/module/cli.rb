@@ -30,7 +30,7 @@ class Cli
     puts "3. Directions"
     self.category = gets.chomp
     puts "Awesome! #{self.chosen_language_name} it is!"
-    self.get_random_three_words
+    self.get_three_random_words.each {|word| puts word}
   end
 
   def chosen_category_name
@@ -55,57 +55,53 @@ class Cli
     end
   end
 
+  #find all translation rows from the table
+  #ittarate through the rows and save as a pair english_word => chosen_language_translation
   def get_all_category_words
     rows = Category.find_by(name: self.chosen_category_name).translations
-    rows.map {|row| puts "#{row.english} => #{row.send(self.chosen_language_name.downcase)}"}
+    rows.map {|row| "#{row.english} => #{row.send(self.chosen_language_name.downcase)}"}
   end
 
-  def get_random_three_words
-    all_words = self.get_all_category_words
-    all_words.shuffle.first(3)
+  #randomize all_category_words and pick three, returns an array
+  def get_three_random_words
+    self.get_all_category_words.shuffle.first(3)
   end
 
 
-  # x = Category.find_by(name: “Greetings”).translations.shuffle.first(3)
-  #   x.map.with_index(1) do |row,index|
-  #   “#{index}.#{row.english} => #{row.french} ”
-  #   end.join(“”)
 
 
 
 
 
-
-
-  def all_together
-    puts "Welcome to PROGRAM_NAME. What is your name?"
-    name = self.input
-    puts "Thank you, #{name.capitalize}. What language would you like to learn today?"
-    language_choice = self.input
-    puts "Great! #{language_choice.capitalize} it is!"
-    puts "What category would you like to practice today?"
-    category_choice = self.input.capitalize.pluralize
-    puts "Great choice! Here are your words."
-
-    category_choice_id = Category.where(name: category_choice).pluck(:id).first
-
-    translation_choice_id = CategoriesTranslation.where(category_id: category_choice_id).pluck(:translation_id)
-
-    translation_row = Translation.where(id: translation_choice_id)
-
-    rand_arr = translation_row.shuffle.first(3)
-
-    # binding.pry
-
-    rand_arr.collect do |row|
-      puts "#{row.english} => #{row.send(language_choice)}"
-    end
+  # def all_together
+  #   puts "Welcome to PROGRAM_NAME. What is your name?"
+  #   name = self.input
+  #   puts "Thank you, #{name.capitalize}. What language would you like to learn today?"
+  #   language_choice = self.input
+  #   puts "Great! #{language_choice.capitalize} it is!"
+  #   puts "What category would you like to practice today?"
+  #   category_choice = self.input.capitalize.pluralize
+  #   puts "Great choice! Here are your words."
+  #
+  #   category_choice_id = Category.where(name: category_choice).pluck(:id).first
+  #
+  #   translation_choice_id = CategoriesTranslation.where(category_id: category_choice_id).pluck(:translation_id)
+  #
+  #   translation_row = Translation.where(id: translation_choice_id)
+  #
+  #   rand_arr = translation_row.shuffle.first(3)
+  #
+  #   # binding.pry
+  #
+  #   rand_arr.collect do |row|
+  #     puts "#{row.english} => #{row.send(language_choice)}"
+  #   end
 
 
     # binding.pry
     # puts translation_row.language_choice
 
-  end
+  # end
 
 
 end
