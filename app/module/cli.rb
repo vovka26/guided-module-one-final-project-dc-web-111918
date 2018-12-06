@@ -1,6 +1,5 @@
 class Cli
   attr_accessor :user_name, :language, :category
-
   def start
     self.greeting
   end
@@ -12,6 +11,7 @@ class Cli
     return self.quit if self.user_name == "quit"
     puts ""
     puts "Thank you, #{self.user_name.capitalize}."
+    puts ""
     self.choose_language
   end
 
@@ -20,10 +20,12 @@ class Cli
     puts "1. Arabic"
     puts "2. French"
     puts "3. Russian"
-    self.quit_text
+    puts ""
     self.language = gets.chomp
     return self.quit if self.language == "quit"
+    puts ""
     puts "Great choice! Let's start learning #{self.chosen_language_name}."
+    puts ""
     self.choose_category
   end
 
@@ -32,10 +34,12 @@ class Cli
     puts "1. Foods"
     puts "2. Greetings"
     puts "3. Directions"
-    self.quit_text
+    puts ""
     self.category = gets.chomp
     return self.quit if self.category == "quit"
+    puts ""
     puts "Awesome! #{self.chosen_language_name} it is!"
+    puts ""
     self.get_three_random_words.each {|word| puts word}
   end
 
