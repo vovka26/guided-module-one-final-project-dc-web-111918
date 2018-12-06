@@ -1,5 +1,5 @@
 class Cli
-  attr_accessor :user_name, :language, :category
+  attr_accessor :user_name, :language, :category, :words_array, :number_of_words
   def start
     self.greeting
   end
@@ -40,7 +40,8 @@ class Cli
     puts ""
     puts "Awesome! #{self.chosen_language_name} it is!"
     puts ""
-    self.get_three_random_words.each {|word| puts word}
+    self.how_many_words
+    self.get_random_words.each {|word| puts word}
   end
 
   def chosen_language_name
@@ -82,8 +83,15 @@ class Cli
   end
 
   #randomize all_category_words and pick three, returns an array
-  def get_three_random_words
-    self.get_all_category_words.shuffle.first(3)
+  def get_random_words
+    self.words_array = self.get_all_category_words.shuffle.first(self.number_of_words.to_i)
+  end
+
+  def how_many_words
+    puts ""
+    puts "How many words would you like to learn today?"
+    puts ""
+    self.number_of_words = gets.chomp
   end
 
   def try_again
