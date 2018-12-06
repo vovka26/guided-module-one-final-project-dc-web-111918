@@ -3,22 +3,26 @@ class Cli
 
   def start
     self.greeting
-
   end
 
   def greeting
     puts "Welcome to PROGRAM_NAME. What is your name?"
-    # binding.pry
-    self.user_name = gets.chomp
+    self.quit_text
+    self.user_name = gets.chomp.downcase
+    return self.quit if self.user_name == "quit"
+    puts ""
+    puts "Thank you, #{self.user_name.capitalize}."
     self.choose_language
   end
 
   def choose_language
-    puts "Thank you, #{self.user_name.capitalize}. What language would you like to learn today?"
+    puts "What language would you like to learn today?"
     puts "1. Arabic"
     puts "2. French"
     puts "3. Russian"
+    self.quit_text
     self.language = gets.chomp
+    return self.quit if self.language == "quit"
     puts "Great choice! Let's start learning #{self.chosen_language_name}."
     self.choose_category
   end
@@ -28,20 +32,11 @@ class Cli
     puts "1. Foods"
     puts "2. Greetings"
     puts "3. Directions"
+    self.quit_text
     self.category = gets.chomp
+    return self.quit if self.category == "quit"
     puts "Awesome! #{self.chosen_language_name} it is!"
     self.get_three_random_words.each {|word| puts word}
-  end
-
-  def chosen_category_name
-    case self.category
-    when "1"
-      "Foods"
-    when "2"
-      "Greetings"
-    when "3"
-      "Directions"
-    end
   end
 
   def chosen_language_name
@@ -52,8 +47,28 @@ class Cli
       "French"
     when "3"
       "Russian"
+    when "quit"
+      self.quit
+    else
+      self.try_again
     end
   end
+
+  def chosen_category_name
+    case self.category
+    when "1"
+      "Foods"
+    when "2"
+      "Greetings"
+    when "3"
+      "Directions"
+    when "quit"
+      self.quit
+    else
+      self.try_again
+    end
+  end
+
 
   #find all translation rows from the table
   #ittarate through the rows and save as a pair english_word => chosen_language_translation
@@ -65,6 +80,26 @@ class Cli
   #randomize all_category_words and pick three, returns an array
   def get_three_random_words
     self.get_all_category_words.shuffle.first(3)
+  end
+
+  def try_again
+    puts ""
+    puts "It seems it was not an option. Plese try it again!"
+    puts ""
+  end
+
+  def quit_text
+    puts ""
+    puts "You can type 'quit' at any time to exit the program."
+    puts ""
+  end
+
+  def quit
+    puts ""
+    puts "Fancy quote"
+    puts ""
+    puts "Good bye!"
+    puts ""
   end
 
 
