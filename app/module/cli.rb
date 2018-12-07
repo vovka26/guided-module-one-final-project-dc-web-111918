@@ -44,6 +44,7 @@ class Cli
     self.get_random_words
     self.flash_cards
 
+
     # self.get_random_words.each {|word| puts word}
   end
 
@@ -85,7 +86,6 @@ class Cli
     rows.map {|row| "#{row.english} => #{row.send(self.chosen_language_name.downcase)}"}
   end
 
-  #randomize all_category_words and pick three, returns an array
   def get_random_words
     self.words_array = self.get_all_category_words.shuffle.first(self.number_of_words.to_i)
   end
@@ -128,6 +128,17 @@ class Cli
     puts "How many words would you like to learn today?"
     puts ""
     self.number_of_words = gets.chomp
+    # binding.pry
+    if self.number_of_words.to_i > self.max_words_amount
+      puts ""
+      puts "That is too many words for today. Let us start with #{self.max_words_amount} words."
+      puts ""
+    end
+  end
+
+  def max_words_amount
+    # binding.pry
+    Category.find_by(name: self.chosen_category_name).translations.length
   end
 
   def try_again
