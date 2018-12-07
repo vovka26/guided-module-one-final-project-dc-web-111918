@@ -112,6 +112,7 @@ class Cli
           puts ""
           puts "This is the end of list."
           puts ""
+          self.new_path
         end
       elsif user_input ==  "p"
         i -= 1
@@ -128,6 +129,7 @@ class Cli
     puts "How many words would you like to learn today?"
     puts ""
     self.number_of_words = gets.chomp
+    return self.quit if self.number_of_words == "quit"
     # binding.pry
     if self.number_of_words.to_i > self.max_words_amount
       puts ""
@@ -139,6 +141,29 @@ class Cli
   def max_words_amount
     # binding.pry
     Category.find_by(name: self.chosen_category_name).translations.length
+  end
+
+  def new_path
+    puts ""
+    puts "What would you like to do next?"
+    puts "1. Choose new language"
+    puts "2. Choose new category"
+    puts "3. Review current words"
+    puts "4. Quit"
+    input = gets.chomp
+    case input
+    when "1"
+      self.choose_language
+    when "2"
+      self.choose_category
+    when "3"
+      self.flash_cards
+    when "4" || "quit"
+      self.quit
+    else
+      self.try_again
+      self.new_path
+    end
   end
 
   def try_again
