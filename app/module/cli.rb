@@ -156,7 +156,9 @@ class Cli
       elsif user_input ==  "p"
         puts ""
         i -= 1
+        puts "-" *35
         puts self.words_array[i]
+        puts "-" *35
       else
         self.try_again
       end
