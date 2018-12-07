@@ -5,18 +5,28 @@ class Cli
   end
 
   def greeting
+    puts "*" *67
+    puts ""
     puts "Welcome to PROGRAM_NAME. What is your name?"
+    puts ""
+    puts "*" *67
     self.quit_text
     self.user_name = gets.chomp.downcase
     return self.quit if self.user_name == "quit"
-    puts ""
+    puts "-" *67
     puts "Thank you, #{self.user_name.capitalize}."
+    puts "-" *67
     puts ""
     self.choose_language
   end
 
   def choose_language
+    puts "*" *67
+    puts ""
     puts "What language would you like to learn today?"
+    puts ""
+    puts "*" *67
+    puts ""
     puts "1. Arabic"
     puts "2. French"
     puts "3. Russian"
@@ -24,13 +34,20 @@ class Cli
     self.language = gets.chomp
     return self.quit if self.language == "quit"
     puts ""
+    puts "-" *67
     puts "Great choice! Let's start learning #{self.chosen_language_name}."
+    puts "-" *67
     puts ""
     self.choose_category
   end
 
   def choose_category
+    puts "*" *67
+    puts ""
     puts "What category of words would you like to practice today?"
+    puts ""
+    puts "*" *67
+    puts ""
     puts "1. Foods"
     puts "2. Greetings"
     puts "3. Directions"
@@ -38,9 +55,13 @@ class Cli
     self.category = gets.chomp
     return self.quit if self.category == "quit"
     puts ""
+    puts "-" *67
     puts "Awesome! #{self.chosen_language_name} it is!"
+    puts "-" *67
     puts ""
     self.how_many_words
+    puts ""
+    puts "*" *67
     self.get_random_words
     self.flash_cards
 
@@ -94,8 +115,9 @@ class Cli
     i = 0
     while i < self.words_array.length
       # binding.pry
-      puts ""
-      puts "'n' for next || 'p' for previous || 'quit' to exit"
+      puts "-" *54
+      puts "| 'n' for next || 'p' for previous || 'quit' to exit |"
+      puts "-" *54
       puts ""
       user_input = gets.chomp.downcase
       return self.quit if user_input == "quit"
@@ -106,9 +128,12 @@ class Cli
         puts ""
       elsif user_input == "n"
         puts ""
+        puts "-" *35
         puts self.words_array[i]
+        puts "-" *35
         i += 1
         if i == self.words_array.length
+          puts "*" *67
           puts ""
           puts "This is the end of list."
           puts ""
@@ -125,8 +150,11 @@ class Cli
   end
 
   def how_many_words
+    puts "*" *67
     puts ""
     puts "How many words would you like to learn today?"
+    puts ""
+    puts "*" *67
     puts ""
     self.number_of_words = gets.chomp
     return self.quit if self.number_of_words == "quit"
@@ -144,13 +172,19 @@ class Cli
   end
 
   def new_path
+    puts "*" *67
     puts ""
     puts "What would you like to do next?"
+    puts ""
+    puts "*" *67
+    puts ""
     puts "1. Choose new language"
     puts "2. Choose new category"
     puts "3. Review current words"
     puts "4. Quit"
+    puts ""
     input = gets.chomp
+    puts ""
     case input
     when "1"
       self.choose_language
@@ -158,7 +192,9 @@ class Cli
       self.choose_category
     when "3"
       self.flash_cards
-    when "4" || "quit"
+    when "4"
+      self.quit
+    when "quit"
       self.quit
     else
       self.try_again
@@ -180,8 +216,11 @@ class Cli
 
   def quit
     language_quotes = ["You can never understand one language until you understand at least two.","To have another language is to possess a second soul. -Charlemagne","A different language is a different vision of life.","Language is the road map of a culture. It tells you where its people come from and where they are going."]
+    puts "*" *67
     puts ""
     puts language_quotes.sample
+    puts ""
+    puts "*" *67
     puts ""
     puts "Good bye!"
     puts ""
