@@ -33,6 +33,9 @@ class Cli
     puts ""
     self.language = gets.chomp
     return self.quit if self.language == "quit"
+    if self.chosen_language_name == self.try_again
+      return self.choose_language
+    end
     puts ""
     puts "-" *67
     puts "Great choice! Let's start learning #{self.chosen_language_name}."
@@ -54,9 +57,12 @@ class Cli
     puts ""
     self.category = gets.chomp
     return self.quit if self.category == "quit"
+    if self.chosen_category_name == nil
+      return self.choose_category
+    end
     puts ""
     puts "-" *67
-    puts "Awesome! #{self.chosen_language_name} it is!"
+    puts "Awesome! #{self.chosen_category_name} it is!"
     puts "-" *67
     puts ""
     self.how_many_words
@@ -159,10 +165,16 @@ class Cli
     self.number_of_words = gets.chomp
     return self.quit if self.number_of_words == "quit"
     # binding.pry
-    if self.number_of_words.to_i > self.max_words_amount
+    if self.number_of_words.scan(/\D/).empty?
+      self.number_of_words.to_i > self.max_words_amount
       puts ""
       puts "That is too many words for today. Let us start with #{self.max_words_amount} words."
       puts ""
+    else
+      puts ""
+      puts "Please enter numbers only"
+      puts ""
+      self.how_many_words
     end
   end
 
