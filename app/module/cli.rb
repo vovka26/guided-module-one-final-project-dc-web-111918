@@ -7,7 +7,7 @@ class Cli
   def greeting
     puts "*" *67
     puts ""
-    puts "Welcome to PROGRAM_NAME. What is your name?"
+    puts "Welcome to LangMe. What is your name?"
     puts ""
     puts "*" *67
     self.quit_text
