@@ -179,8 +179,9 @@ class Cli
   end
 
   def quit
+    language_quotes = ["You can never understand one language until you understand at least two.","To have another language is to possess a second soul. -Charlemagne","A different language is a different vision of life.","Language is the road map of a culture. It tells you where its people come from and where they are going."]
     puts ""
-    puts "Fancy quote"
+    puts language_quotes.sample
     puts ""
     puts "Good bye!"
     puts ""
