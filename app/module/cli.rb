@@ -54,6 +54,8 @@ class Cli
     puts "1. Foods"
     puts "2. Greetings"
     puts "3. Directions"
+    puts "4. Politeness"
+    puts "5. Family"
     puts ""
     self.category = gets.chomp
     return self.quit if self.category == "quit"
@@ -98,6 +100,10 @@ class Cli
       "Greetings"
     when "3"
       "Directions"
+    when "4"
+      "Politeness"
+    when "5"
+      "Family"
     when "quit"
       self.quit
     else
@@ -132,12 +138,14 @@ class Cli
         puts "This is the beginning of the words set."
         puts "Please type 'n'."
         puts ""
+        puts self.words_array[0]
+        puts ""
       elsif user_input == "n"
         puts ""
         puts "-" *35
+        i += 1
         puts self.words_array[i]
         puts "-" *35
-        i += 1
         if i == self.words_array.length
           puts "*" *67
           puts ""
@@ -146,8 +154,8 @@ class Cli
           self.new_path
         end
       elsif user_input ==  "p"
-        i -= 1
         puts ""
+        i -= 1
         puts self.words_array[i]
       else
         self.try_again
@@ -162,14 +170,16 @@ class Cli
     puts ""
     puts "*" *67
     puts ""
-    self.number_of_words = gets.chomp
+    self.number_of_words = gets.chomp.slice(0..10)
     return self.quit if self.number_of_words == "quit"
     # binding.pry
     if self.number_of_words.scan(/\D/).empty?
-      self.number_of_words.to_i > self.max_words_amount
+      # binding.pry
+      if self.number_of_words.to_i > self.max_words_amount
       puts ""
       puts "That is too many words for today. Let us start with #{self.max_words_amount} words."
       puts ""
+      end
     else
       puts ""
       puts "Please enter numbers only"
@@ -179,6 +189,7 @@ class Cli
   end
 
   def max_words_amount
+    # binding.pry
     # binding.pry
     Category.find_by(name: self.chosen_category_name).translations.length
   end
