@@ -12,5 +12,17 @@ describe "Cli" do
     expect(cli.user_name).to eq("user name")
   end
 
+  it "returns language associated with input number" do
+     allow($stdin).to receive(:gets).and_return("1")
+     cli.language = $stdin.gets
+         expect(cli.chosen_language_name).to eq "Arabic"
+   end
+
+   it "returns category associated with input number" do
+     allow($stdin).to receive(:gets).and_return("3")
+     cli.category = $stdin.gets
+         expect(cli.chosen_category_name).to eq "Directions"
+   end
+
 
 end

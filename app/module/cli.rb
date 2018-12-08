@@ -128,6 +128,8 @@ class Cli
     while i < self.words_array.length
       # binding.pry
       puts "-" *54
+      puts "We are about to start. Please enter a letter to start:"
+      puts ""
       puts "| 'n' for next || 'p' for previous || 'quit' to exit |"
       puts "-" *54
       puts ""
@@ -135,16 +137,17 @@ class Cli
       return self.quit if user_input == "quit"
       if user_input == "p" && i == 0
         # binding.pry
-        puts "This is the beginning of the words set."
-        puts "Please type 'n'."
+        puts "You did not get any words yet."
         puts ""
-        puts self.words_array[0]
+        puts "Please type 'n' to start."
         puts ""
+        # puts self.words_array[0]
+        # puts ""
       elsif user_input == "n"
         puts ""
         puts "-" *35
-        i += 1
         puts self.words_array[i]
+        i += 1
         puts "-" *35
         if i == self.words_array.length
           puts "*" *67
@@ -169,6 +172,7 @@ class Cli
     puts "*" *67
     puts ""
     puts "How many words would you like to learn today?"
+    puts ""
     puts ""
     puts "*" *67
     puts ""
@@ -236,6 +240,8 @@ class Cli
   def quit_text
     puts ""
     puts "You can type 'quit' at any time to exit the program."
+    puts ""
+    puts "Please use numbers to navigate."
     puts ""
   end
 
